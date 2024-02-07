@@ -21,9 +21,7 @@ func (d *DatastoreAccessOrchestrator) Start() {
 				// Get the person from the datastore
 				d.GetPersonsProcessingQueue <- <-d.GetPersonsStagingQueue
 			}
-		}
-
-		if len(d.UpdatePersonsStagingQueue) > 0 {
+		} else if len(d.UpdatePersonsStagingQueue) > 0 {
 			// Try to clear the get processing queue and then push onto the update processing queue
 			if len(d.GetPersonsProcessingQueue) > 0 {
 				// Wait until this queue is empty
